@@ -1,0 +1,19 @@
+https://dashboard.heroku.com/apps/hotel-booking-system-v2/deploy/heroku-git
+https://devcenter.heroku.com/articles/deploying-nodejs
+
+push to server
+
+1/ heroku login (input heroku email +  pw)
+2/ create Procfile (no extension) with content web: npm start
+3/ git init
+4/ heroku git:remote -a hotel-booking-system-v2
+5/ npm install
+6/ heroku local web
+7/ git add .
+8/ git commit -m "make it better"
+9/ git push heroku master
+
+clone code:
+1/ heroku login
+2/ heroku git:clone -a hotel-booking-and-reservations
+3/ cd hotel-booking-and-reservations

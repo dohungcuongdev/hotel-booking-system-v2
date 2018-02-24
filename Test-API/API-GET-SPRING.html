@@ -1,0 +1,89 @@
+<link href="bootstrap.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="myCtrl">
+<br>
+<div class="row">
+<div class="col-lg-12">
+	<div class="col-lg-5">
+		<div ng-repeat="x in list_api_GET">
+			<p ng-if="indexSelected==$index" style="color:white;background:red;cursor:pointer" id="api{{$index}}" ng-click="highlightLink($index)">{{serverAPI}}{{x}}</p>
+			<p ng-if="indexSelected!=$index" style="cursor:pointer" id="api{{$index}}" ng-click="highlightLink($index, x.api, x.example)">{{serverAPI}}{{x}}</p>
+		</div>
+	</div>
+	<div class="col-lg-7">
+		<iframe ng-src="{{frameSRC | trustAsResourceUrl}}" height="400" width="660"></iframe>
+	</div>
+	<br><a href="http://jsoneditoronline.org/" target="_blank">Copy JSON to this link</a>
+	<p id="with-param" style="color:red"><p>
+	<p id="example" style="color:green"><p>
+	<input type="text" id="input" value="{{apiURL}}" size="90">
+	<button ng-click="getAPI()">GET API</button>
+</div>
+</div>
+</body>
+<script>
+//local
+//const SPRING_SERVER_URL = "http://localhost:8080/Hotel-booking-and-reservations-system-admin/";
+
+//online
+const SPRING_SERVER_URL = "https://admin-hotel-booking.herokuapp.com/";
+
+const API_URL = SPRING_SERVER_URL + "api/"
+
+var list_api_GET = [
+{"api" : 'rooms'},
+{"api" : 'rooms/id/:id', "example" : 'rooms/id/1'},
+{"api" : 'rooms/:name', "example" : 'rooms/102'},
+{"api" : 'rooms/page/:page', "example" : 'rooms/page/2'},
+{"api" : 'rooms/all/quantity'},
+	
+{"api" : 'restaurant'},
+{"api" : 'restaurant/:id', "example" : 'restaurant/3'},
+
+
+{"api" : 'page-access-chart'},
+{"api" : 'page-access-chart/userIP/:userIP', "example" : 'page-access-chart/userIP/192.168.0.102'},
+{"api" : 'page-access-chart/username/:username', "example" : 'page-access-chart/username/cdo7@csc.com'},
+	
+	
+	
+	
+	
+	
+];
+
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+  $scope.serverAPI = API_URL;
+  $scope.indexSelected = null;
+  $scope.apiURL = null;
+  $scope.list_api_GET = list_api_GET;
+  $scope.highlightLink = function(index, apiURL, example) {
+		$scope.indexSelected = index;
+		$scope.apiURL = API_URL + apiURL;
+		document.getElementById('input').value = $scope.apiURL;
+		if(apiURL.includes(':')) {
+			document.getElementById('with-param').innerHTML = 'Please input params (refer API below)';
+			var example_url = API_URL + example;
+			document.getElementById('example').innerHTML = example_url;
+			$scope.frameSRC = example_url;
+		}
+		else {
+			document.getElementById('with-param').innerHTML = '';
+			document.getElementById('example').innerHTML = '';
+			$scope.frameSRC = $scope.apiURL;
+		}
+  }
+  
+  $scope.getAPI = function() {
+	 $scope.apiURL = $scope.frameSRC = document.getElementById('input').value;
+  }
+});
+
+app.filter('trustAsResourceUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}])
+
+</script>
