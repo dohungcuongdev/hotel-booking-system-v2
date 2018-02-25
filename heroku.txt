@@ -10,7 +10,7 @@ push to server
 5/ npm install
 6/ heroku local web
 7/ git add .
-8/ git commit -m "make it better"
+8/ git commit -m "deploy on server"
 9/ git push heroku master
 
 clone code:
