@@ -15,5 +15,5 @@ push to server
 
 clone code:
 1/ heroku login
-2/ heroku git:clone -a hotel-booking-and-reservations
+2/ heroku git:clone -a hotel-booking-system-v2
 3/ cd hotel-booking-and-reservations
