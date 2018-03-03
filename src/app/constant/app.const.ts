@@ -8,7 +8,7 @@
 
 //online v2
 export const EXPRESS_SERVER_URL = 'https://hotel-booking-system-v2.herokuapp.com/'
-export const SPRING_SERVER_URL = "https://hotel-booking-system-v2.herokuapp.com/"
+export const SPRING_SERVER_URL = "https://admin-hotel-booking-v1.herokuapp.com/"
 
 //online v1
 // const EXPRESS_SERVER_URL = "https://hotel-booking-system-v1.herokuapp.com/"
