@@ -16,7 +16,6 @@ export default class ApiService<T> { // no need to import from app module
     }
 
     protected getAll(): Observable<any[]> {
-        console.log(this.apiUrl);
         return this.http.get(this.apiUrl).map(response => response.json())
     }
 
